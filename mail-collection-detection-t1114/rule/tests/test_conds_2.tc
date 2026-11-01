@@ -1,0 +1,3 @@
+# test comment
+table_list default
+expect not {"correlation_name":"Local_Email_Collection"}

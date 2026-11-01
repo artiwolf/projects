@@ -1,0 +1,4 @@
+Description: 'Правило выявляет чтение файлов локальной почты процессом, которого нет в списке штатных потребителей (Outlook, Defender, Windows Search). Источник: Security 4663 при включённом аудите файловой системы и SACL на каталогах с почтой. Возможные ложные срабатывания: агенты резервного копирования, DLP и EDR, утилиты миграции почты, ручное копирование .pst пользователем.'
+EventDescriptions:
+    - LocalizationId: 'corrname_Local_Email_Collection'
+      EventDescription: 'На узле {event_src.host} процесс {subject.process.fullpath} под учётной записью {subject.account.name} прочитал почтовый файл {object.fullpath}. Данная активность может свидетельствовать о сборе локальной почты пользователя.'

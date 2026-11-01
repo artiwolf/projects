@@ -1,0 +1,4 @@
+Description: 'The rule detects reading of local mail storage files by a process that is not on the allowlist of legitimate consumers (Outlook, Defender, Windows Search). Source: Security 4663 with File System auditing enabled and a SACL on the mail directories. Possible false positives: backup agents, DLP and EDR products, mail migration tools, manual .pst copying by the user.'
+EventDescriptions:
+    - LocalizationId: 'corrname_Local_Email_Collection'
+      EventDescription: 'On host {event_src.host}, process {subject.process.fullpath} running as {subject.account.name} read the mail file {object.fullpath}. This activity may indicate collection of the user''s local email.'

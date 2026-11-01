@@ -1,0 +1,29 @@
+ObjectId: SEC-CR-133873024
+ContentAutoName: Local_Email_Collection
+ExpertContext:
+    Created: 01.11.2026
+    Updated: 01.11.2026
+    KnowledgeHolders:
+        - "Коневских Анжелика"
+    Usecases:
+        - Детект чтения локальных почтовых хранилищ (.pst, .ost, .nst) процессом, не входящим в список штатных потребителей этих файлов
+        - Сбор почты пользователя перед выгрузкой (T1114.001), например скриптом PowerShell, копирующим и читающим .pst и .ost
+    DataSources:
+        - Provider: Microsoft-Windows-Security-Auditing
+          EventID:
+              - 4663
+    References:
+        - https://attack.mitre.org/techniques/T1114/001/
+    Improvements:
+        - Добавить порог по числу разных почтовых файлов, прочитанных одним процессом за короткое время
+        - Связать с Sysmon EID 11 (копирование .pst и .ost в каталоги вне профиля Outlook) и с последующей сетевой активностью или архивацией
+        - Расширить на Thunderbird (mbox без расширения, Mail и ImapMail) и на новый Outlook
+        - Дополнять белый список процессов (резервное копирование, DLP, EDR) по результатам эксплуатации
+EventDescriptions:
+    - Criteria: correlation_name = "Local_Email_Collection"
+      LocalizationId: corrname_Local_Email_Collection
+ContentRelations:
+    Implements:
+        ATTACK:
+            collection:
+                - T1114.001

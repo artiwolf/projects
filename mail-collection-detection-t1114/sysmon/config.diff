@@ -1,0 +1,13 @@
+﻿╤Ёртэхэшх Їрщыют .\ORIG-CONFIG\sysmonconfig-export.xml ш .\SYSMON-CONFIG.XML
+***** .\ORIG-CONFIG\sysmonconfig-export.xml
+  729:                  <FileCreate onmatch="include">
+  730:                          <TargetFilename name="T1023" condition="contains">\Start Menu</TargetFilename> <!--Windows: Startup lin
+***** .\SYSMON-CONFIG.XML
+  729:                  <FileCreate onmatch="include">
+  730:          <TargetFilename name="mail-archive-created" condition="end with">.pst</TargetFilename>
+  731:          <TargetFilename name="mail-cache-created"   condition="end with">.ost</TargetFilename>
+  732:          <TargetFilename name="mail-mbox-created"    condition="end with">.mbox</TargetFilename>
+  733:          <TargetFilename name="T1023" condition="contains">\Start Menu</TargetFilename>
+  734:                          <TargetFilename name="T1023" condition="contains">\Start Menu</TargetFilename> <!--Windows: Startup lin
+*****
+

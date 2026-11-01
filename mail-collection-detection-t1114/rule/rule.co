@@ -1,0 +1,44 @@
+event Mail_Storage_Read:
+    key:
+        event_src.host
+    filter {
+        filter::NotFromCorrelator()
+        and event_src.title == "windows"
+        and msgid == "4663"
+        and regex(lower(object.fullpath), "[.](pst|ost|nst)$", 0) != null
+        and datafield5 == "0x1"
+        
+        and regex(lower(subject.process.fullpath), "^c:\\\\program files\\\\microsoft office\\\\.+\\\\outlook.exe$|^c:\\\\program files\\\\windowsapps\\\\microsoft.outlookforwindows_.+\\\\olk.exe$|^c:\\\\programdata\\\\microsoft\\\\windows defender\\\\platform\\\\.+\\\\msmpeng.exe$|^c:\\\\windows\\\\system32\\\\(searchprotocolhost|searchindexer).exe$", 0) == null
+    }
+
+rule Local_Email_Collection: Mail_Storage_Read
+
+    init {
+        $labels = "w_auto"
+    }
+
+    on Mail_Storage_Read {
+        $event_src.host = event_src.host
+        $object.fullpath = object.fullpath
+        $subject.account.name = subject.account.name
+        $subject.process.fullpath = subject.process.fullpath
+    }
+
+   emit {
+       $correlation_type = "incident"
+       $importance = "medium"
+
+       $subject = "account"
+       $action = "read"
+       $object = "file"
+       $status = "success"
+
+       $category.generic = "Attack"
+       $category.high = "Collection"
+       $category.low = "Local Email Collection"
+
+       $incident.aggregation.key = join([$correlation_name, $event_src.host, $subject.process.fullpath], "|")
+       $incident.severity = $importance
+       $incident.category = "Undefined"
+       $incident.aggregation.timeout = 10m
+   }
