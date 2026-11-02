@@ -1,13 +1,14 @@
-﻿╤Ёртэхэшх Їрщыют .\ORIG-CONFIG\sysmonconfig-export.xml ш .\SYSMON-CONFIG.XML
-***** .\ORIG-CONFIG\sysmonconfig-export.xml
-  729:                  <FileCreate onmatch="include">
-  730:                          <TargetFilename name="T1023" condition="contains">\Start Menu</TargetFilename> <!--Windows: Startup lin
-***** .\SYSMON-CONFIG.XML
-  729:                  <FileCreate onmatch="include">
-  730:          <TargetFilename name="mail-archive-created" condition="end with">.pst</TargetFilename>
-  731:          <TargetFilename name="mail-cache-created"   condition="end with">.ost</TargetFilename>
-  732:          <TargetFilename name="mail-mbox-created"    condition="end with">.mbox</TargetFilename>
-  733:          <TargetFilename name="T1023" condition="contains">\Start Menu</TargetFilename>
-  734:                          <TargetFilename name="T1023" condition="contains">\Start Menu</TargetFilename> <!--Windows: Startup lin
-*****
-
+diff --git "a/.\\orig-config\\sysmonconfig-export.xml" "b/.\\sysmon-config.xml"
+index 3e2d75c..a25d382 100644
+--- "a/.\\orig-config\\sysmonconfig-export.xml"
++++ "b/.\\sysmon-config.xml"
+@@ -482,6 +482,9 @@
+ 		<!--DATA: UtcTime, ProcessGuid, ProcessId, Image, TargetFilename, CreationUtcTime-->
+ 	<RuleGroup name="" groupRelation="or">
+ 		<FileCreate onmatch="include">
++        <TargetFilename name="mail-archive-created" condition="end with">.pst</TargetFilename>
++        <TargetFilename name="mail-cache-created"   condition="end with">.ost</TargetFilename>
++        <TargetFilename name="mail-mbox-created"    condition="end with">.mbox</TargetFilename>
+ 			<TargetFilename name="T1023" condition="contains">\Start Menu</TargetFilename> <!--Windows: Startup links and shortcut modification [ https://attack.mitre.org/wiki/Technique/T1023 ] -->
+ 			<TargetFilename name="T1165" condition="contains">\Startup\</TargetFilename> <!--Microsoft:Changes to user's auto-launched files and shortcuts-->
+ 			<TargetFilename name="OutlookAttachment" condition="contains">\Content.Outlook\</TargetFilename> <!--Microsoft:Outlook: attachments-->
