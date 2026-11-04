@@ -1,0 +1,46 @@
+EVENTLOG = 'EventID="SysmonNetworkConnection"'
+
+COND = $Provider["Name"] == "Microsoft-Windows-Sysmon"
+
+action = "connect"
+object = "connection"
+status = "success"
+
+subject = "rule"
+object = "connection"
+subject.name = $Data["RuleName"]
+object.process.id = $Data["ProcessId"]
+object.process.fullpath = lower($Data["Image"])
+object.process.guid = strip($Data["ProcessGuid"], "{", "}")
+src.ip = $Data["SourceIp"]
+src.hostname = lower($Data["SourceHostname"])
+src.port = maybe_number($Data["SourcePort"])
+dst.ip = $Data["DestinationIp"]
+dst.hostname = lower($Data["DestinationHostname"])
+dst.port = maybe_number($Data["DestinationPort"])
+protocol = lower($Data["Protocol"])
+direction = switch $Data["Initiated"]
+    case "false" "ingress"
+    case "true" "egress"
+endswitch
+
+time = $TimeCreated["SystemTime"]
+msgid = "3"
+importance = "info"
+
+category.generic = "Connection"
+category.high = "Availability Management"
+category.low = "Control"
+
+event_src.vendor = "microsoft"
+event_src.title = "sysmon"
+event_src.subsys = $Channel
+if find_substr($Computer, '.') != null then
+    event_src.fqdn = lower($Computer)
+    event_src.hostname = lower(substr($Computer, 0, find_substr($Computer, '.')))
+else
+    event_src.hostname = lower($Computer)
+endif
+event_src.category = "Other"
+
+id = "Microsoft_Windows_eventlog_3_SysmonNetworkConnection"

@@ -1,0 +1,4 @@
+Description: 'Нормализация события создания файла из журнала Sysmon (Event ID 11).'
+EventDescriptions:
+    - LocalizationId: 'sysmon_file_create_1'
+      EventDescription: 'Процесс {subject.process.fullpath} создал файл {object.fullpath} на узле {event_src.fqdn}; идентификатор учётной записи: {subject.account.id}'

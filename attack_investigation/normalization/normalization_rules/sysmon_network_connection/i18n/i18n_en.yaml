@@ -1,0 +1,4 @@
+Description: 'Normalization of a network connection event from the Sysmon log (Event ID 3).'
+EventDescriptions:
+    - LocalizationId: 'sysmon_network_connection_1'
+      EventDescription: 'A {protocol} connection was opened on host {event_src.fqdn} from {src.ip}:{src.port} to {dst.ip}:{dst.port}'

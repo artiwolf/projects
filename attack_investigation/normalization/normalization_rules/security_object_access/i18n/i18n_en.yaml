@@ -1,0 +1,4 @@
+Description: 'Normalization of an object access event from the Windows Security log (Event ID 4663).'
+EventDescriptions:
+    - LocalizationId: 'security_object_access_1'
+      EventDescription: 'User {subject.account.name} accessed object {object.name} on host {event_src.fqdn}; process: {subject.process.fullpath}; access mask: {object.value}'

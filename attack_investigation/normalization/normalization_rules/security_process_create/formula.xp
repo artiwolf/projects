@@ -1,0 +1,41 @@
+EVENTLOG = 'EventID="WinProcessCreate"'
+
+COND = $Provider["Name"] == "MSWin.Security-Auditing"
+
+action = "start"
+object = "process"
+status = "success"
+
+subject = "account"
+object = "process"
+subject.account.name = lower($Data["SubjectUserName"])
+subject.account.domain = lower($Data["SubjectDomainName"])
+subject.account.id = $Data["SubjectUserSid"]
+object.process.id = maybe_number16($Data["NewProcessId"])
+object.process.fullpath = lower($Data["NewProcessName"])
+object.process.cmdline = $Data["CommandLine"]
+object.process.parent.id = maybe_number16($Data["ProcessId"])
+object.process.parent.fullpath = lower($Data["ParentProcessName"])
+datafield1 = $Data["TokenElevationType"]
+datafield2 = $Data["MandatoryLabel"]
+
+time = $TimeCreated["SystemTime"]
+msgid = "4688"
+importance = "info"
+
+category.generic = "Process"
+category.high = "Availability Management"
+category.low = "Control"
+
+event_src.vendor = "microsoft"
+event_src.title = "windows"
+event_src.subsys = $Channel
+if find_substr($Computer, '.') != null then
+    event_src.fqdn = lower($Computer)
+    event_src.hostname = lower(substr($Computer, 0, find_substr($Computer, '.')))
+else
+    event_src.hostname = lower($Computer)
+endif
+event_src.category = "Other"
+
+id = "Microsoft_Windows_eventlog_4688_WinProcessCreate"

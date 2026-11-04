@@ -1,0 +1,4 @@
+Description: 'Нормализация события создания процесса из журнала Windows Security (Event ID 4688).'
+EventDescriptions:
+    - LocalizationId: 'security_process_create_1'
+      EventDescription: 'Пользователь {subject.account.name} запустил процесс {object.process.fullpath} на узле {event_src.fqdn}'

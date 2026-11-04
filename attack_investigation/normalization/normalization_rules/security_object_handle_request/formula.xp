@@ -1,0 +1,43 @@
+EVENTLOG = 'EventID="WinHandleObjectRequested"'
+
+COND = $Provider["Name"] == "MSWin.Security-Auditing"
+
+action = "access"
+object = "file"
+status = "ongoing"
+
+subject = "process"
+object = "file"
+subject.account.name = lower($Data["SubjectUserName"])
+subject.account.domain = lower($Data["SubjectDomainName"])
+subject.account.id = $Data["SubjectUserSid"]
+subject.process.id = maybe_number16($Data["ProcessId"])
+subject.process.fullpath = lower($Data["ProcessName"])
+object.name = $Data["ObjectName"]
+object.type = lower($Data["ObjectType"])
+object.property = "access_mask"
+object.value = $Data["AccessMask"]
+datafield1 = $Data["AccessList"]
+datafield2 = $Data["AccessReason"]
+datafield3 = $Data["HandleId"]
+
+time = $TimeCreated["SystemTime"]
+msgid = "4656"
+importance = "info"
+
+category.generic = "File"
+category.high = "Availability Management"
+category.low = "Control"
+
+event_src.vendor = "microsoft"
+event_src.title = "windows"
+event_src.subsys = $Channel
+if find_substr($Computer, '.') != null then
+    event_src.fqdn = lower($Computer)
+    event_src.hostname = lower(substr($Computer, 0, find_substr($Computer, '.')))
+else
+    event_src.hostname = lower($Computer)
+endif
+event_src.category = "Other"
+
+id = "Microsoft_Windows_eventlog_4656_WinHandleObjectRequested"

@@ -1,0 +1,7 @@
+EventDescriptions:
+    - Criteria: id = "Microsoft_Windows_eventlog_1_SysmonProcessCreate"
+      LocalizationId: 'sysmon_process_create_1'
+ObjectId: SEC-NF-140874886
+ExpertContext:
+    Created: 04.11.2026
+    Updated: 04.11.2026

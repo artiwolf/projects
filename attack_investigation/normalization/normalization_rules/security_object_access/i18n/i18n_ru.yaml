@@ -1,0 +1,4 @@
+Description: 'Нормализация события обращения к объекту из журнала Windows Security (Event ID 4663).'
+EventDescriptions:
+    - LocalizationId: 'security_object_access_1'
+      EventDescription: 'Пользователь {subject.account.name} получил доступ к объекту {object.name} на узле {event_src.fqdn}; процесс: {subject.process.fullpath}; маска доступа: {object.value}'

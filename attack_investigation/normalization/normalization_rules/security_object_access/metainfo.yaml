@@ -1,0 +1,7 @@
+EventDescriptions:
+    - Criteria: id = "Microsoft_Windows_eventlog_4663_WinObjectAccessAttempt"
+      LocalizationId: 'security_object_access_1'
+ObjectId: SEC-NF-105695096
+ExpertContext:
+    Created: 04.11.2026
+    Updated: 04.11.2026

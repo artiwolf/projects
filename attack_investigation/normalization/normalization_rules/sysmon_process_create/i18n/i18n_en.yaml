@@ -1,0 +1,4 @@
+Description: 'Normalization of a process creation event from the Sysmon log (Event ID 1).'
+EventDescriptions:
+    - LocalizationId: 'sysmon_process_create_1'
+      EventDescription: 'Process {object.process.fullpath} was started on host {event_src.fqdn}; account identifier: {object.account.id}'

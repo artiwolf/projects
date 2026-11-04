@@ -1,0 +1,4 @@
+Description: 'Нормализация события дублирования дескриптора процесса из журнала Windows Security (Event ID 4690).'
+EventDescriptions:
+    - LocalizationId: 'security_handle_duplicate_1'
+      EventDescription: 'Пользователь {subject.account.name} инициировал дублирование дескриптора процесса {subject.process.id} для процесса {object.process.id} на узле {event_src.fqdn}'

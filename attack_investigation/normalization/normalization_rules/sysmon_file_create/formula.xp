@@ -1,0 +1,38 @@
+EVENTLOG = 'EventID="SysmonFileCreate"'
+
+COND = $Provider["Name"] == "MSWin.Sysmon"
+
+action = "create"
+object = "file"
+status = "success"
+
+subject = "process"
+object = "file"
+subject.account.id = $Data["User"]
+subject.process.id = $Data["ProcessId"]
+subject.process.fullpath = lower($Data["Image"])
+subject.process.guid = strip($Data["ProcessGuid"], "{", "}")
+object.name = $Data["TargetFilename"]
+object.fullpath = lower($Data["TargetFilename"])
+datafield1 = $Data["CreationUtcTime"]
+
+time = $TimeCreated["SystemTime"]
+msgid = "11"
+importance = "info"
+
+category.generic = "File"
+category.high = "Availability Management"
+category.low = "Control"
+
+event_src.vendor = "microsoft"
+event_src.title = "sysmon"
+event_src.subsys = $Channel
+if find_substr($Computer, '.') != null then
+    event_src.fqdn = lower($Computer)
+    event_src.hostname = lower(substr($Computer, 0, find_substr($Computer, '.')))
+else
+    event_src.hostname = lower($Computer)
+endif
+event_src.category = "Other"
+
+id = "Microsoft_Windows_eventlog_11_SysmonFileCreate"

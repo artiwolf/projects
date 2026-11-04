@@ -1,0 +1,4 @@
+Description: 'Normalization of a process handle duplication event from the Windows Security log (Event ID 4690).'
+EventDescriptions:
+    - LocalizationId: 'security_handle_duplicate_1'
+      EventDescription: 'User {subject.account.name} initiated handle duplication from process {subject.process.id} to process {object.process.id} on host {event_src.fqdn}'

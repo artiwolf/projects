@@ -1,0 +1,4 @@
+Description: 'Нормализация события сетевого соединения из журнала Sysmon (Event ID 3).'
+EventDescriptions:
+    - LocalizationId: 'sysmon_network_connection_1'
+      EventDescription: 'На узле {event_src.fqdn} открыто соединение по протоколу {protocol} с узла {src.ip}:{src.port} на узел {dst.ip}:{dst.port}'

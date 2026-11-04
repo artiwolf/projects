@@ -1,0 +1,7 @@
+EventDescriptions:
+    - Criteria: id = "Microsoft_Windows_eventlog_3_SysmonNetworkConnection"
+      LocalizationId: 'sysmon_network_connection_1'
+ObjectId: SEC-NF-678755559
+ExpertContext:
+    Created: 04.11.2026
+    Updated: 04.11.2026

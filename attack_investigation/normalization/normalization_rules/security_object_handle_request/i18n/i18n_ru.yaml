@@ -1,0 +1,4 @@
+Description: 'Нормализация события запроса дескриптора объекта из журнала Windows Security (Event ID 4656).'
+EventDescriptions:
+    - LocalizationId: 'security_object_handle_request_1'
+      EventDescription: 'Пользователь {subject.account.name} запросил доступ к объекту {object.name} на узле {event_src.fqdn}; процесс: {subject.process.fullpath}; маска доступа: {object.value}'

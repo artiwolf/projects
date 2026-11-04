@@ -1,0 +1,4 @@
+Description: 'Нормализация события создания процесса из журнала Sysmon (Event ID 1).'
+EventDescriptions:
+    - LocalizationId: 'sysmon_process_create_1'
+      EventDescription: 'Процесс {object.process.fullpath} запущен на узле {event_src.fqdn}; идентификатор учётной записи: {object.account.id}'

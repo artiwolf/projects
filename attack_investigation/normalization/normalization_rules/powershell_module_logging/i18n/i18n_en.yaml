@@ -1,0 +1,4 @@
+Description: 'Normalization of a PowerShell Module Logging event from the PowerShell log (Event ID 4103).'
+EventDescriptions:
+    - LocalizationId: 'powershell_module_logging_1'
+      EventDescription: 'PowerShell module activity was logged on host {event_src.fqdn}; process: {subject.process.name}; event data: {object.value}'

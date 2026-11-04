@@ -1,0 +1,44 @@
+EVENTLOG = 'EventID="SysmonProcessCreate"'
+
+COND = $Provider["Name"] == "MSWin.Sysmon"
+
+action = "start"
+object = "process"
+status = "success"
+
+subject = "account"
+object = "process"
+object.account.id = $Data["User"]
+object.account.session_id = maybe_number16($Data["LogonId"])
+object.process.id = $Data["ProcessId"]
+object.process.fullpath = lower($Data["Image"])
+object.process.cmdline = $Data["CommandLine"]
+object.process.guid = strip($Data["ProcessGuid"], "{", "}")
+object.process.parent.id = $Data["ParentProcessId"]
+object.process.parent.fullpath = lower($Data["ParentImage"])
+object.process.parent.guid = strip($Data["ParentProcessGuid"], "{", "}")
+$temp_hashes = keyvalue($Data["Hashes"], ",", "=")
+object.process.hash.sha256 = $temp_hashes["SHA256"]
+object.process.hash.md5 = $temp_hashes["MD5"]
+object.process.hash.sha1 = $temp_hashes["SHA1"]
+
+time = $TimeCreated["SystemTime"]
+msgid = "1"
+importance = "info"
+
+category.generic = "Process"
+category.high = "Availability Management"
+category.low = "Control"
+
+event_src.vendor = "microsoft"
+event_src.title = "sysmon"
+event_src.subsys = $Channel
+if find_substr($Computer, '.') != null then
+    event_src.fqdn = lower($Computer)
+    event_src.hostname = lower(substr($Computer, 0, find_substr($Computer, '.')))
+else
+    event_src.hostname = lower($Computer)
+endif
+event_src.category = "Other"
+
+id = "Microsoft_Windows_eventlog_1_SysmonProcessCreate"

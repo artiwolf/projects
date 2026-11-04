@@ -1,0 +1,4 @@
+Description: 'Normalization of a process creation event from the Windows Security log (Event ID 4688).'
+EventDescriptions:
+    - LocalizationId: 'security_process_create_1'
+      EventDescription: 'User {subject.account.name} started process {object.process.fullpath} on host {event_src.fqdn}'

@@ -1,0 +1,37 @@
+EVENTLOG = 'EventID="WinPowershellScriptExec"'
+
+COND = $Provider["Name"] == "MSWin.PowerShell"
+
+action = "execute"
+object = "process"
+status = "success"
+
+subject = "process"
+object = "process"
+subject.process.name = "powershell.exe"
+subject.account.id = $Data["ContextInfo"]
+object.name = "PowerShell Module Logging"
+object.value = $Data["Payload"]
+datafield1 = $Data["ContextInfo"]
+datafield2 = $Data["UserData"]
+
+time = $TimeCreated["SystemTime"]
+msgid = "4103"
+importance = "info"
+
+category.generic = "Process"
+category.high = "Availability Management"
+category.low = "Control"
+
+event_src.vendor = "microsoft"
+event_src.title = "windows"
+event_src.subsys = $Channel
+if find_substr($Computer, '.') != null then
+    event_src.fqdn = lower($Computer)
+    event_src.hostname = lower(substr($Computer, 0, find_substr($Computer, '.')))
+else
+    event_src.hostname = lower($Computer)
+endif
+event_src.category = "Other"
+
+id = "Microsoft_Windows_eventlog_4103_WinPowershellScriptExec"

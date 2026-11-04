@@ -1,0 +1,4 @@
+Description: 'Normalization of a file creation event from the Sysmon log (Event ID 11).'
+EventDescriptions:
+    - LocalizationId: 'sysmon_file_create_1'
+      EventDescription: 'Process {subject.process.fullpath} created file {object.fullpath} on host {event_src.fqdn}; account identifier: {subject.account.id}'

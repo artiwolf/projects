@@ -1,0 +1,4 @@
+Description: 'Normalization of an object handle request event from the Windows Security log (Event ID 4656).'
+EventDescriptions:
+    - LocalizationId: 'security_object_handle_request_1'
+      EventDescription: 'User {subject.account.name} requested access to object {object.name} on host {event_src.fqdn}; process: {subject.process.fullpath}; access mask: {object.value}'

@@ -1,0 +1,7 @@
+EventDescriptions:
+    - Criteria: id = "Microsoft_Windows_eventlog_4690_WinHandleDuplicateAttempt"
+      LocalizationId: 'security_handle_duplicate_1'
+ObjectId: SEC-NF-779966099
+ExpertContext:
+    Created: 04.11.2026
+    Updated: 04.11.2026
